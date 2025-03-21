@@ -1,0 +1,23 @@
+services:
+  # Backend Service (Django)
+  backend:
+    build: ./backend
+    container_name: backend-ner-container
+    image: backend_ner
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+
+  # Frontend Service (React)
+  frontend:
+    build: ./frontend
+    container_name: frontend-ner-container
+    image: frontend_ner
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
